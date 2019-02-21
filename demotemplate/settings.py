@@ -55,30 +55,10 @@ OH_DIRECT_UPLOAD = OH_API_BASE + '/project/files/upload/direct/'
 OH_DIRECT_UPLOAD_COMPLETE = OH_API_BASE + '/project/files/upload/complete/'
 OH_DELETE_FILES = OH_API_BASE + '/project/files/delete/'
 
-#Fitbit Configuration
+# Fitbit Configuration
 TWITTER_CLIENT_ID = os.getenv('TWITTER_CLIENT_ID')
 TWITTER_CLIENT_SECRET = os.getenv('TWITTER_CLIENT_SECRET')
 TWITTER_REDIRECT_URI = os.getenv('TWITTER_REDIRECT_URI')
-
-# Requests Respectful (rate limiting, waiting)
-if REMOTE is True:
-    from urllib.parse import urlparse
-    url_object = urlparse(os.getenv('REDIS_URL', 'redis://'))
-    # logger.info('Connecting to redis at %s:%s',
-    #     url_object.hostname,
-    #     url_object.port)
-    RespectfulRequester.configure(
-        redis={
-            "host": url_object.hostname,
-            "port": url_object.port,
-            "password": url_object.password,
-            "database": 0
-        },
-        safety_threshold=5)
-
-# This creates a Realm called "twitter" that allows 150 requests per minute maximum.
-rr = RespectfulRequester()
-rr.register_realm("twitter", max_requests=5000, timespan=3600)
 
 # Applications installed
 INSTALLED_APPS = [
