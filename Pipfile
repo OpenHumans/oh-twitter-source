@@ -18,6 +18,7 @@ kombu = "==4.2.2-post1"
 pyyaml = "==4.2b4"
 open-humans-api = "*"
 tweepy = "*"
+ipython = "*"
 
 [dev-packages]
 vcrpy = "*"
