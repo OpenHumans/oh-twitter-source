@@ -30,9 +30,6 @@ def process_twitter(oh_id):
     """
     logger.debug('Starting twitter processing for {}'.format(oh_id))
     oh_member = OpenHumansMember.objects.get(oh_id=oh_id)
-    oh_access_token = oh_member.get_access_token(
-                            client_id=settings.OPENHUMANS_CLIENT_ID,
-                            client_secret=settings.OPENHUMANS_CLIENT_SECRET)
     recent_since_id = get_last_id(oh_access_token)
     twitter_member = oh_member.datasourcemember
     auth = tweepy.OAuthHandler(
@@ -42,7 +39,7 @@ def process_twitter(oh_id):
     auth.set_access_token(
             twitter_member.access_token,
             twitter_member.access_token_secret)
-    twitter_api = tweepy.API(auth,wait_on_rate_limit=True)
+    twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
     update_twitter(oh_member, twitter_api, recent_since_id)
 
 
