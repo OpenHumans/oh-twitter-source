@@ -67,7 +67,7 @@ def fetch_new_items(recent_since_id, mode, twitter_api):
     if not recent_since_id:
         for tweet in tweepy.Cursor(
                 endpoint,
-                tweet_mode='extended').items(200):
+                tweet_mode='extended').items(1000):
             month = str(tweet.created_at)[:7]
             new_items[month].append(tweet._json)
     else:
