@@ -30,7 +30,7 @@ def process_twitter(oh_id):
     """
     logger.debug('Starting twitter processing for {}'.format(oh_id))
     oh_member = OpenHumansMember.objects.get(oh_id=oh_id)
-    recent_since_id = get_last_id(oh_member.get_access_token())
+    recent_tweet_id, recent_like_id = get_last_id(oh_member.get_access_token())
     twitter_member = oh_member.datasourcemember
     auth = tweepy.OAuthHandler(
                             settings.TWITTER_CLIENT_ID,
@@ -40,28 +40,46 @@ def process_twitter(oh_id):
             twitter_member.access_token,
             twitter_member.access_token_secret)
     twitter_api = tweepy.API(auth, wait_on_rate_limit=True)
-    update_twitter(oh_member, twitter_api, recent_since_id)
+    update_twitter(oh_member, twitter_api, recent_tweet_id, recent_like_id)
 
 
-def update_twitter(oh_member, twitter_api, recent_since_id):
-    new_tweets = defaultdict(list)
+def update_twitter(oh_member, twitter_api, recent_tweet_id, recent_like_id):
+    new_tweets = fetch_new_items(recent_tweet_id, 'tweets', twitter_api)
+    new_likes = fetch_new_items(recent_tweet_id, 'likes', twitter_api)
+
+    new_items = {'likes': new_likes, 'tweets': new_tweets}
+    fetched_months = []
+    for endpoint in new_items.keys():
+        for m in new_items[endpoint].keys():
+            fetched_months.append(m)
+    fetched_months = list(set(fetched_months))
+    for month in fetched_months:
+        monthly_data = {'likes': new_likes[month], 'tweets': new_tweets[month]}
+        write_new_tweets(oh_member, twitter_api, month, monthly_data)
+
+
+def fetch_new_items(recent_since_id, mode, twitter_api):
+    new_items = defaultdict(list)
+    if mode == 'tweets':
+        endpoint = twitter_api.user_timeline
+    else:
+        endpoint = twitter_api.favorites
     if not recent_since_id:
         for tweet in tweepy.Cursor(
-                twitter_api.user_timeline,
+                endpoint,
                 tweet_mode='extended').items(200):
             month = str(tweet.created_at)[:7]
-            new_tweets[month].append(tweet._json)
+            new_items[month].append(tweet._json)
     else:
         for tweet in tweepy.Cursor(
-                twitter_api.user_timeline, tweet_mode='extended',
+                endpoint, tweet_mode='extended',
                 since_id=recent_since_id).items():
             month = str(tweet.created_at)[:7]
-            new_tweets[month].append(tweet._json)
-    for month in new_tweets.keys():
-        write_new_tweets(oh_member, twitter_api, month, new_tweets[month])
+            new_items[month].append(tweet._json)
+    return new_items
 
 
-def write_new_tweets(oh_member, twitter_api, month, updated_tweets):
+def write_new_tweets(oh_member, twitter_api, month, new_data):
     existing_files = api.exchange_oauth2_member(oh_member.get_access_token())
     old_data = None
     file_id = None
@@ -71,9 +89,11 @@ def write_new_tweets(oh_member, twitter_api, month, updated_tweets):
             file_id = dfile['id']
             break
     if old_data:
-        old_data['tweets'] = updated_tweets + old_data['tweets']
+        old_data['tweets'] = new_data['tweets'] + old_data['tweets']
+        old_data['likes'] = new_data['likes'] + old_data['likes']
     else:
-        old_data = {'tweets': updated_tweets, 'followers': [], 'following': []}
+        old_data = {'tweets': new_data['tweets'], 'likes': new_data['likes'],
+                    'followers': [], 'following': []}
     if month == str(datetime.datetime.today())[:7]:
         me = twitter_api.me()
         old_data['followers'].append(
@@ -104,6 +124,8 @@ def write_new_tweets(oh_member, twitter_api, month, updated_tweets):
 def get_last_id(oh_access_token):
     member = api.exchange_oauth2_member(oh_access_token)
     twitter_files = {}
+    tweet_id = None
+    like_id = None
     for dfile in member['data']:
         if 'Twitter' in dfile['metadata']['tags']:
             twitter_files[dfile['basename']] = dfile
@@ -118,5 +140,8 @@ def get_last_id(oh_access_token):
         print("fetched last ID from OH")
         print(twitter_data['tweets'][0]['id_str'])
         print('---')
-        return twitter_data['tweets'][0]['id_str']
-    return None
+        if len(twitter_data['tweets']):
+            tweet_id = twitter_data['tweets'][0]['id_str']
+        if len(twitter_data['likes']):
+            like_id = twitter_data['tweets'][0]['id_str']
+    return tweet_id, like_id
