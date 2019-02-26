@@ -1,71 +1,32 @@
 {% extends 'main/base.html' %}
 {% load static %}
-{% block content %}
 
-  <div class="container">
-    <h1>Integrate your <i>Twitter</i> account into <i>Open Humans</i></h1>
-    <p class="lead">
-      This app connects your <i>Twitter</i> to your
-      <a href="https://www.openhumans.org/">Open Humans</a> account and
-      makes sure to update your data regularly.
-    </p>
-    <p class="lead">
-      Learn more by visiting our
-      <a href="{{ oh_proj_page }}">page on Open Humans</a>.
-    </p>
+{% block main %}
+<div class="jumbotron">
+  <div class="container-fluid">
     <div class="row">
-      <div class="col-md-6">
-        <h2>How it works</h2>
-        <ol>
-          <li><b>Click the button below</b><br>
-            This takes you to Open Humans authentification page.</li>
-          <li><b>Log in or create an Open Humans account</b><br>
-            Your Twitter data will be added to this account.</li>
-          <li><b>Authorize this app in Open Humans</b><br>
-            This authorizes us to add your Twitter data to your account.</li>
-          <li><b>Authorize us to access your Twitter account.</b><br>
-            The Open Humans website will redirect you back to us for the last
-            step: Authorizing us to access your <i>Twitter</i> account.
-          </li>
-        </ol>
-        {% if client_id %}
-        <a
-          class="btn btn-primary btn-lg"
-          href="https://www.openhumans.org/direct-sharing/projects/oauth2/authorize/?client_id={{ client_id }}&response_type=code"
-          {% else %}
-          class="btn btn-default disabled"
-          {% endif %}
-          >
-          Start with Open Humans authorization
-        </a>
-        {% if not client_id %}
-        <p class="text-muted"><i>
-          This button is disabled because client_id hasn't been configured.
-        </i></p>
-        {% endif %}
+      <div class="col" style="text-align: center;">
+        <img class="img-fluid oh-cnxn-icon" src="{% static 'img/logo.png' %}">
       </div>
-      <div class='col-md-6'>
-        <h2>FAQ</h2>
-        <ol>
-          <li><b>Will my data from Twitter be public?</b><br>
-            <b>The short answer</b>: No, by connecting your account you don't agree
-            to make your data public or give anyone access to this data.
-            It will be stored in your Open Humans account and you decide with whom to share.<br>
-            <b>The longer answer</b>: It can be public if you want it to be public.
-            If you're logged in into Open Humans <a href='https://www.openhumans.org/public-data/'>
-              can make individual sources publicly available
-            through the public data feature</a>.
-          </li>
-          <li><b>Do you keep my data up to date?</b><br>
-            Yes, we regularly update your data to keep it up to date.
-          After logging in you can also manually trigger an update.</li>
-          <li><b>Who's running this project?</b><br>
-            This project is run by the team of Open Humans itself.</li>
-          <li><b>How can I be in touch with you?</b><br>
-            You can reach us via email at support@openhumans.org
-          </li>
-        </ol>
+      <div class="col-md-9 col-lg-10">
+        <h1>Open&nbsp;Humans&nbsp;/ Twitter&nbsp;API Connection</h1>
+        <p>
+          Twitter collects data about your own tweets, images, videos, and more.
+          You can use this website to retrieve and store detailed data on your
+          tweets & likes in your Open Humans account.
+        </p>
       </div>
     </div>
+    <div class="row">
+      <div class="col-md-9 offset-md-3 col-lg-10 offset-lg-2">
+        <a href="https://www.openhumans.org/direct-sharing/projects/oauth2/authorize/?client_id={{ client_id }}&response_type=code" class="btn btn-primary">
+          Log in via Open Humans
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
-{% endblock %}
+
+{% include 'main/partials/about-1.html' %}
+
+{% endblock main %}

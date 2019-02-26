@@ -8,5 +8,7 @@ urlpatterns = [
     path('twitter_complete/', views.twitter_complete, name='twitter_complete'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('update_data/', views.update_data, name='update_data'),
-    path('remove_twitter/', views.remove_twitter, name='remove_twitter')
+    path('remove_twitter/', views.remove_twitter, name='remove_twitter'),
+    path(r'logout/', views.logout_user, name='logout'),
+    path(r'about/', views.about, name='about'),
 ]
