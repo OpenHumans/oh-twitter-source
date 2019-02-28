@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   viewBox="0 0 400 400"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="oh-twitter-source-logo.svg"
+   inkscape:version="0.92.3 (2405546, 2018-03-11)">
+  <metadata
+     id="metadata20">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>oh-twitter-source-logo</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="3066"
+     inkscape:window-height="1689"
+     id="namedview18"
+     showgrid="false"
+     inkscape:zoom="0.59"
+     inkscape:cx="70.940718"
+     inkscape:cy="-129.21427"
+     inkscape:window-x="134"
+     inkscape:window-y="55"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg16" />
+  <defs
+     id="defs4">
+    <style
+       id="style2">.cls-1{fill:#1da1f2;}.cls-2{fill:#fff;}.cls-3{fill:none;}</style>
+  </defs>
+  <title
+     id="title6">Twitter_Logo_White-on-Blue</title>
+  <circle
+     style="opacity:1;fill:#00b8bd;fill-opacity:1;stroke:none;stroke-width:14.58809853;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path829"
+     cx="211.86441"
+     cy="193.22034"
+     r="184.74576" />
+  <path
+     style="fill:#ffffff;fill-opacity:1;stroke:#fefefe;stroke-width:1.00157475;stroke-linecap:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+     d="m 343.49414,93.164062 c -8.82945,3.02851 -16.63473,9.101188 -25.48828,11.822268 -4.55591,1.3155 -9.6868,3.63685 -14.19336,3.29101 -26.00975,-23.500554 -72.428,-17.55734 -90.78125,12.65235 -6.82932,10.12498 -10.53569,22.3222 -10.48828,34.53515 -38.1824,-5.27226 -73.24894,-27.78375 -94.84766,-59.417965 -17.044261,18.260485 -20.541262,46.837755 -10.736326,69.296875 -8.344954,3.87589 -6.908323,14.6049 -5.107422,21.92773 2.179192,11.66108 8.876098,22.09747 15.531248,31.36914 -1.9513,7.74608 3.6561,14.65818 6.2461,21.52344 6.25666,11.29846 16.04602,20.53149 27.51757,26.41602 -18.60151,8.48628 -39.62595,7.71356 -59.378902,8.3457 -7.166179,4.41566 -3.189798,15.99952 4.216797,17.65039 57.770235,37.32117 141.116265,31.29555 190.541015,-17.50586 30.79487,-29.1172 47.94419,-71.49623 47.3125,-113.75781 14.27243,-10.68835 23.44511,-26.46978 32.01758,-41.6875 1.44176,-3.82044 -3.07676,-7.0302 -6.43852,-5.0833 -2.72932,0.61444 -6.62704,2.31095 -8.59273,2.32939 1.94681,-7.05969 6.28615,-13.97766 5.99023,-21.414059 -0.38589,-1.45943 -1.82183,-2.437236 -3.32031,-2.292969 z"
+     id="path11-3"
+     inkscape:connector-curvature="0" />
+  <path
+     style="fill:#ff7444;fill-opacity:1"
+     inkscape:connector-curvature="0"
+     id="path11"
+     d="m 169.48441,306.81034 c 94.34,0 145.94,-78.16 145.94,-145.94 0,-2.22 0,-4.43 -0.15,-6.63 a 104.36,104.36 0 0 0 25.58999,-26.55 102.38,102.38 0 0 1 -29.45999,8.07 51.47,51.47 0 0 0 22.54999,-28.37 102.79,102.79 0 0 1 -32.56999,12.45 51.34,51.34 0 0 0 -87.41,46.78 145.62,145.62 0 0 1 -105.71001,-53.59 51.33,51.33 0 0 0 15.88,68.47 50.91,50.91 0 0 1 -23.28,-6.42 c 0,0.21 0,0.43 0,0.65 a 51.31,51.31 0 0 0 41.15001,50.28 51.21,51.21 0 0 1 -23.16001,0.88 51.35,51.35 0 0 0 47.92001,35.62 102.92,102.92 0 0 1 -63.70001,22 104.41,104.41 0 0 1 -12.209996,-0.74 145.21,145.21 0 0 0 78.620006,23"
+     class="cls-2" />
+  <rect
+     style="fill:none"
+     y="0"
+     x="0"
+     id="rect13"
+     height="400"
+     width="400"
+     class="cls-3" />
+</svg>
