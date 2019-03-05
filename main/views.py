@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 from open_humans.models import OpenHumansMember
 from .models import DataSourceMember
-from .helpers import get_twitter_file, check_update
+from .helpers import get_twitter_files
 from datauploader.tasks import process_twitter
 from ohapi import api
 import arrow
@@ -28,6 +28,25 @@ def index(request):
                    'oh_proj_page': settings.OH_ACTIVITY_PAGE}
 
         return render(request, 'main/index.html', context=context)
+
+
+def about(request):
+    """
+    Share further details about the project.
+    """
+    context = {'client_id': settings.OPENHUMANS_CLIENT_ID,
+            #    'redirect_uri': '{}/complete'.format(settings.OPENHUMANS_APP_BASE_URL),
+               'oh_proj_page': settings.OH_ACTIVITY_PAGE}
+    return render(request, 'main/about.html', context=context)
+
+
+def logout_user(request):
+    """
+    Logout user.
+    """
+    if request.method == 'POST':
+        logout(request)
+    return redirect('/')
 
 
 def complete(request):
@@ -74,12 +93,11 @@ def dashboard(request):
     if request.user.is_authenticated:
         if hasattr(request.user.oh_member, 'datasourcemember'):
             twitter_member = request.user.oh_member.datasourcemember
-            download_file = get_twitter_file(request.user.oh_member)
+            download_file = get_twitter_files(request.user.oh_member)
             if download_file == 'error':
                 logout(request)
                 return redirect("/")
             redirect_url = ''
-            # allow_update = check_update(twitter_member)
             allow_update = True
         else:
             allow_update = False
@@ -98,11 +116,11 @@ def dashboard(request):
                 print('Error! Failed to get request token.')
 
             # connect_url = redirect_url
-      
+
         context = {
             'oh_member': request.user.oh_member,
             'twitter_member': twitter_member,
-            'download_file': download_file,
+            'twitter_files': download_file,
             'connect_url': redirect_url,
             'allow_update': allow_update
         }
