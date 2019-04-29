@@ -80,7 +80,9 @@ def fetch_new_items(recent_since_id, mode, twitter_api):
 
 
 def write_new_tweets(oh_member, twitter_api, month, new_data):
-    existing_files = api.exchange_oauth2_member(oh_member.get_access_token())
+    existing_files = api.exchange_oauth2_member(
+        oh_member.get_access_token(),
+        all_files=True)
     old_data = None
     file_id = None
     for dfile in existing_files['data']:
@@ -122,7 +124,9 @@ def write_new_tweets(oh_member, twitter_api, month, new_data):
 
 
 def get_last_id(oh_access_token):
-    member = api.exchange_oauth2_member(oh_access_token)
+    member = api.exchange_oauth2_member(
+        oh_access_token,
+        all_files=True)
     twitter_files = {}
     tweet_id = None
     like_id = None
